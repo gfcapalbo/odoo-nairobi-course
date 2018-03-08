@@ -1,16 +1,32 @@
 
 Module  - Module structure basic 2
-   Data files XML
-   record and menuitem and <data noupdate="1">
-   actwindow ans domains
-   Security groups
-   Creating Module Data, 
-   XMLID/external id, 
+===================================
+
+   Intro
+   -----
+
+   Data files XML - records - XMLID/ExternalID
+   -------------------------------------------
+
    self.env.ref()
-   When is data installed? difference between -u (update) and -i  (/initialization), 
+   --------------
+
+   menuitem  act_windows and domains
+   ---------------------------------
+    
+   noupdate modifier
+   -----------------
+   
+ 
+   Security groups
+   ---------------
+
    ----Exercise: Add data from this morning into a module
    ----Exercise: Add to project_todo  a) a project b) a set of completed tasks c) a set of tasks to complete
 
+
+Intro
+-----
 
   In this lesson we will learn how to add hardcoded data to our module. Data we can rely on in our program, use
   and refer to in our code. 
@@ -19,11 +35,14 @@ Module  - Module structure basic 2
 
   Data can also be used to modify existing data from previous models of wich we know the existence.
 
+
+Data files XML - records - XMLID/ExternalID
+-------------------------------------------
+
   The " data " structure in odoo, in canonical module structure is placed in the /data directory. Not because it is significantly 
   different from other XML records we have previously discussed but to logically order them and distinguish them from views and templates.
 
   Data XML's must be included in the manifest under the 'data' key.
-
 
   The XMLID is an unique unifier for a record in a database. It is assigned and managed by the Odoo framework and accessible to the programmer by knowing simple rules about it's nomenclature.
   An id is a record of model ir.model.data
@@ -101,6 +120,21 @@ We are creating a new record with unique XML ID "project_todo.mt_task_new" and i
   In this way you are sure the data you need is already loaded when you start creating yours.
 
   Wrong inheritance definition is a common source of bugs.
+
+
+self.env.ref()
+--------------
+Our enviroment variable, wich is a property of any model can call and resolve an XMLID, in order to fetch back the information it contains, by using the function ref().
+
+self.env.ref('Full XML ID ') will return the record (allways unique!!!!) of that particular XMLID.
+
+SO for example  if i define:
+
+<sel
+
+
+
+self.env.ref('project_todo.
 
 
 
