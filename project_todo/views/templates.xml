@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <template id="assets_backend" name="project_todo assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/project_todo/static/src/js/project_todo.js"></script>
+                <link rel="stylesheet" href="/project_todo/static/src/css/project_todo.css"/>
+            </xpath>
+        </template>
+    </data>
+</openerp>
