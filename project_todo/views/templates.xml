@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-        <template id="assets_backend" name="project_todo assets" inherit_id="web.assets_backend">
-            <xpath expr="." position="inside">
-                <script type="text/javascript" src="/project_todo/static/src/js/project_todo.js"></script>
-                <link rel="stylesheet" href="/project_todo/static/src/css/project_todo.css"/>
-            </xpath>
-        </template>
-    </data>
-</openerp>
+<odoo>
+	<template id="assets_backend" name="project_todo assets" inherit_id="web.assets_backend">
+		<xpath expr="." position="inside">
+			<script type="text/javascript" src="/project_todo/static/src/js/project_todo.js"></script>
+			<link rel="stylesheet" href="/project_todo/static/src/css/project_todo.css"/>
+		</xpath>
+	</template>
+
+
+	<menuitem id="todo_menu"
+		parent="project.menu_main_pm" 
+		action="show_todo_list"		
+		/>
+
+	<act_window id="show_todo_list"
+		name="todos"
+		res_model="todo"
+		view_mode="list"
+		/>
+</odoo>

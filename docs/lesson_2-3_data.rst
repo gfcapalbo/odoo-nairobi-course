@@ -3,12 +3,6 @@
         ==================================
 
 
-            
-
-           ----Exercise: Add data from this morning into a module
-           ----Exercise: Add to project_todo  a) a project b) a set of completed tasks c) a set of tasks to complete
-
-
         Intro
         -----
 
@@ -188,7 +182,8 @@
 
            noupdate modifier
            -----------------
-           Everytime we upgrade a module , the data we make is not loaded. It is loaded only o
+            If the data should never be changed by the user. we can add to our <odoo> tag <odoo nopudate="1">
+            the default is noupdate=0, most data is intended to be modified after module install.
 
 
            
@@ -203,6 +198,29 @@
 
            https://github.com/OCA/OCB/blob/10.0/addons/project/data/project_demo.xml#L6
 
-           
+           we can assign groups to menuitem 
 
+
+         Demo Data
+         ---------
+         Demo Data is the same of normal data, it is in the manifest under the key "demo" not "data", this means it will be loaded only if we have demo data enabled.
+
+
+
+         EXERCISES
+         ---------
+
+
+          EXERCISE 1
+                Create a set of 10 TODO objects with content , connected to the user defined in:
+                https://github.com/OCA/OCB/blob/10.0/addons/project/data/project_demo.xml#L6
+        
+          EXERCISE 2 
+                create via module data a set of 2 todo Types  "work todos"  "house todo"  
+
+          EXERCISE 3
+                Change some of the new todo objects and give them one of the types you just made.
+
+          EXERCISE 4  
+                Read and comprehend the code linked in this lesson.
 
