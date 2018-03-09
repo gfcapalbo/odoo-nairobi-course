@@ -47,7 +47,8 @@ there is an automatic addition HERE:
 
 https://github.com/OCA/OCB/blob/10.0/odoo/addons/base/ir/ir_actions.py#762
 
-
+ANd here is the complete list of "Action Slots"
+https://github.com/OCA/OCB/blob/10.0/odoo/addons/base/ir/ir_values.py#L15
 
 
 SERVER ACTIONS
