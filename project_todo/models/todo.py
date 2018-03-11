@@ -2,7 +2,7 @@
 # © 2018 Therp BV <https://therp.nl>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from openerp import api, fields, models
-
+import datetime
 
 class ProjectTodo(models.Model):
     _name = 'project.todo'
@@ -19,14 +19,14 @@ class ProjectTodo(models.Model):
         compute='_compute_days_left',
         inverse='_inverse_days_left'
     )
-    is_urgent = fields.Boolean(compute='_compute_is_urgent')
+    is_urgent = fields.Boolean(compute='_compute_is_urgent' store=True)
     todo_type_importance = fields.Integer(related='todo_type.importance',  readonly=True)
 
     @api.depends('deadline')
     def _compute_days_left(self):
         today = fields.Date.from_string(fields.Date.today())
         for this in self:
-            td = today - fields.Date.from_string(this.deadline)
+            td = fields.Date.from_string(this.deadline) - today
             #active record
             this.days_left = td.days
 
@@ -36,7 +36,7 @@ class ProjectTodo(models.Model):
     def _inverse_days_left(self):
         today = fields.Date.from_string(fields.Date.today())
         for this in self:
-            d = today - timedelta(days=this.days_left)
+            d = today - datetime.timedelta(days=this.days_left)
             this.deadline = fields.Date.to_string(d)
 
     def _compute_is_urgent(self):
