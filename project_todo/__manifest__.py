@@ -9,13 +9,9 @@
     "category": "Project",
     "summary": "All the projects I need to do",
     "depends": [
-        'project',
     ],
     "data": [
-        # 'data/todo_data.xml',
-        'data/server_actions.xml',
         'views/templates.xml',
-        # 'security/ir.model.access.csv',
     ],
     "qweb": [
     ],
