@@ -128,9 +128,12 @@ Tis is a very powerful way to modularize and reuse code.
 So I have a function
 
 ::
+
 def giovannis_function(my_name):
     return 'I have a name, its %' % my_name
+    
 ::
+
 
 I can decorate it 
 
