@@ -107,21 +107,21 @@ Decorators in Python
 --------------------
 Consider these statements:
 
-        A function is a object like everything else in python
-        A function can return a function object.
-        A function can take a function as an argument.
+        - A function is a object like everything else in python
+        - A function can return a function object.
+        - A function can take a function as an argument.
 
-Let those statements settle. (10 seconds of silence).
 
 A decorator is a python function that wraps another function, in other words, it takes a function in imput, does something to it and spits out another function.
 
 
 Explictly there it is:
-
+::
 def  i_decorate(function):
     def wrap_this(myString):
         return mystring + 'i\'m decorated'
     return wrap_this
+::
 
 this function "i_decorate" takes a function that has 1 argument "mystring" and makes that function do whatever it does , but it changes mystring to something cooler.
 
@@ -130,10 +130,10 @@ this decorator is good only for functions that have one non keyword argument , b
 Tis is a very powerful way to modularize and reuse code.
 
 So I have a function:
-
+::
 def giovannis_function(my_name):
     return 'I have a name, its %' % my_name
-
+::
 
 I can decorate it 
 
