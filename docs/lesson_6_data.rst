@@ -95,13 +95,16 @@
 
                 ::
 
-                We are creating a new record with unique XML ID "project_todo.mt_task_new" and it will generate an error , because not all required fields of the model
+                We are creating a new record with unique XML ID "project_todo.mt_task_new" and it will generate an error , 
+                because not all required fields of the model
                 "mail.message.subtype" are defined and it will be impossible to create a new record.
 
 
 
-                  THe order with wich the XML IDS are evaluated is decided by the module inheritance tree. So if you are modifying an existing Data record or if you 
-                  refer to an existing data record, make sure your module depends on the module that conains the definition of the data record you change/refer to.
+                  THe order with wich the XML IDS are evaluated is decided by the module inheritance tree. 
+                  So if you are modifying an existing Data record or if you 
+                  refer to an existing data record, make sure your module depends on the module that conains 
+                  the definition of the data record you change/refer to.
 
                   In this way you are sure the data you need is already loaded when you start creating yours.
 
@@ -110,7 +113,8 @@
 
         self.env.ref()
         --------------
-                Our enviroment variable, wich is a property of any model can call and resolve an XMLID, in order to fetch back the information it contains, by using the function ref().
+                Our enviroment variable, wich is a property of any model can call and resolve an XMLID, 
+                in order to fetch back the information it contains, by using the function ref().
 
                 self.env.ref('Full XML ID ') will return the record (allways unique!!!!) of that particular XMLID.
 
@@ -138,7 +142,8 @@
                 menuitem tag: creates menu items   ---->  its just a shortcut for creating a record of model ir.ui.menu ! 
                         https://github.com/OCA/OCB/blob/10.0/odoo/addons/base/ir/ir_ui_menu.py#L18
 
-                act_window: creates window actions  ----> its just a shortcut for creating a record of model ir.actions.act_window !
+              elf.env.ref('project_todo.todo_data') will return a record of the todo model , fully accessible.
+              act_window: creates window actions  ----> its just a shortcut for creating a record of model ir.actions.act_window !
                         https://github.com/OCA/OCB/blob/10.0/odoo/addons/base/ir/ir_actions.py#L237
                                  
                         (note here how the table of this model is specifically imposed, remember this when navigating the database)
@@ -151,15 +156,19 @@
                         
                         https://github.com/OCA/OCB/blob/10.0/odoo/tools/convert.py#L494
 
-                * knowing these internals is important, because every "convenience"  method/tag/function , while making our lives easier for rapid development is a level
+                * knowing these internals is important, because every "convenience"  method/tag/function , 
+                  while making our lives easier for rapid development is a level
                   of abstraction that obfucates comprehension in case something goes wrong. *
-                (personally i would prefer to tag everything as a record, it is coherent and mantains tighter connection to the data, but it is not commony done)
+                (personally i would prefer to tag everything as a record, 
+                it is coherent and mantains tighter connection to the data, but it is not commonly done)
 
 
                 Now let's add to our module a menu for opening an action that opens a tree view for out 'todo' model.
 
-                Normally menuitems and actions are not contained in the /data folder but in the /views folder together with formviews, 
-                on the other hand, when we will study  wizards, which  is a special type of model (transient model) , we will see them contained in the /wizard folder.
+                Normally menuitems and actions are not contained in the 
+                /data folder but in the /views folder together with formviews, 
+                on the other hand, when we will study  wizards, which  i
+                s a special type of model (transient model) , we will see them contained in the /wizard folder.
                 Logically it makes no difference , it's about code readability.
                                 
                         Internal view priorities.
