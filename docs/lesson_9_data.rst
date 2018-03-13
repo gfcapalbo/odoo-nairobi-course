@@ -86,12 +86,6 @@ But this interface form , as we have seen is just creating a ir.actions.server r
 
 
 
-
-
-
-
-
-
 Going out of the "lines" of the ORM renderer 
 --------------------------------------------
 In our last lessons we will see how to change the JS backend of odoo in order to have complete freedom to do whatever we want in the interface.
@@ -115,8 +109,10 @@ Consider these statements:
 A decorator is a python function that wraps another function, in other words, it takes a function in imput, does something to it and spits out another function.
 
 
-Explictly there it is:
+Explictly 
+
 ::
+
 def  i_decorate(function):
     def wrap_this(myString):
         return mystring + 'i\'m decorated'
@@ -129,7 +125,8 @@ this decorator is good only for functions that have one non keyword argument , b
 
 Tis is a very powerful way to modularize and reuse code.
 
-So I have a function:
+So I have a function
+
 ::
 def giovannis_function(my_name):
     return 'I have a name, its %' % my_name
