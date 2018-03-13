@@ -41,7 +41,7 @@ THe more button is one of such places where odoo allows us to add commands, and 
 here are the shortcuts the client understands
 
 key2 = client_action_multi   (our action will end up in more...)
-key2 = clinet_print_multi   (will end up in print ......)
+key2 = client_print_multi   (will end up in print ......)
 
 there is an automatic addition HERE:
 
