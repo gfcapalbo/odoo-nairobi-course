@@ -3,9 +3,9 @@ Python Inheritance
 
 Normal python inheritance, while may used when programming with odoo is not what we mean by 'inheritance'when referring to odoo.
 The ORM , in the model package offers a type of  inheritance with many extra features and possibilities.
-THis allows us to plug in existing methods of existing 
 
-THis approcach may be limited by the poor modularization of the original method(s), and may require an MR to the core module to improve that.
+This allows us to plug in existing methods of existing modules,
+puggling in may be limited by the poor modularization of the original method(s), and may require an MR to the core module to improve that.
 
 
 
@@ -41,7 +41,8 @@ https://github.com/OCA/OCB/blob/10.0/addons/product/models/product.py#L110
 we have here 1 delegation and 1 Classical inheritance on product.product
 
 product.product delegates on product_template via product_tmpl_id field.
-the class also inherits 'mail.thread' (as many other classes do) inheriting completely attl the attributes  and methods needed for the threads we see in the interface under the forms.
+the class also inherits 'mail.thread' (as many other classes do) inheriting completely attl the attributes  
+and methods needed for the threads we see in the interface under the forms.
 
 
 When creating custom modules , the extensions are the most common inheritance needed.
@@ -54,7 +55,16 @@ how to use odoo inheritance to extend create() - calling super()
 We refer to extension inheritance.
 
 
-Method ovverriding by replacing the original method in odoo seems like an extremly rare usecase , what wewant is an extension.
+Method ovverriding by replacing the original method in odoo seems like an extremly rare usecase , what we want is an extension.
+
+    Some examples:
+        in the model sale.order we want to extend creation, after creating the sale order, we want to also set the value of 
+        a new field we added.
+
+        so we create a folder in /models and define a class that inherits models.Model. (python inheritance)
+
+
+
 
 
 - logical placement of super. In writes. In Creates.
