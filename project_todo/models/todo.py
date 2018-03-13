@@ -10,7 +10,7 @@ class ProjectTodo(models.Model):
 
     name = fields.Char()
     text_todo = fields.Text('Content of Todo')
-    user = fields.Many2one('res.users', required=True)
+    user = fields.Many2one('res.users')
     todo_type = fields.Many2one(
         string='type Of Todo', 
         comodel_name='project.todo.type')

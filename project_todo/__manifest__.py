@@ -12,7 +12,7 @@
         'project',
     ],
     "data": [
-        # 'data/todo_data.xml',
+        'data/data.xml',
         'views/templates.xml',
         # 'security/ir.model.access.csv',
     ],
