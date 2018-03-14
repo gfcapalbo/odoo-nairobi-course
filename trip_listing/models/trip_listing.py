@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import time
-from datetime import datetime
 from openerp import models, fields, api, _
 
 TRIP_LISTING_TYPES = [

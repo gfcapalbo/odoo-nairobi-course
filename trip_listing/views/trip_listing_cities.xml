@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- LISTING CITY -->
+
+        <record id="trip_listing_city_tree_view" model="ir.ui.view">
+            <field name="name">trip.listing.city_id.tree</field>
+            <field name="model">trip.listing.city</field>
+            <field name="arch" type="xml">
+                <tree string="Trip Listing City">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="trip_listing_city_form_view" model="ir.ui.view">
+            <field name="name">trip.listing.city.form</field>
+            <field name="model">trip.listing.city</field>
+            <field name="arch" type="xml">
+                <form string="Trip Listing City" version="10.0">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_trip_listing_city" model="ir.actions.act_window">
+            <field name="name">Cities</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">trip.listing.city</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Listing Cities"
+                  action="action_trip_listing_city"
+                  parent="menu_listing_listing"
+                  id="menu_trip_listing_listing_city"
+                  sequence="5"/>
+    </data>
+</odoo>

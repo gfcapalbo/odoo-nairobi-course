@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- LISTING CATEGORY -->
+
+        <record id="trip_listing_category_tree_view" model="ir.ui.view">
+            <field name="name">trip.listing.category.tree</field>
+            <field name="model">trip.listing.category</field>
+            <field name="arch" type="xml">
+                <tree string="Trip Listing Category">
+                    <field name="category_image" widget="image"/>
+                    <field name="name"/>
+                    <field name="icon"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="trip_listing_category_form_view" model="ir.ui.view">
+            <field name="name">trip.listing.category.form</field>
+            <field name="model">trip.listing.category</field>
+            <field name="arch" type="xml">
+                <form string="Trip Listing Category" version="10.0">
+                    <sheet>
+                        <field name="category_image" widget="image"
+                               class="oe_avatar"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="icon"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_trip_listing_category" model="ir.actions.act_window">
+            <field name="name">Trip Listing Categories</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">trip.listing.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Listing Categories"
+                  action="action_trip_listing_category"
+                  parent="menu_listing_listing"
+                  id="menu_trip_listing_listing_category"
+                  sequence="3"/>
+
+    </data>
+</odoo>
