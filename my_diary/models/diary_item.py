@@ -4,10 +4,11 @@
 from openerp import api, fields, models
 
 
-class ProjectTodoType(models.Model):
-    _name = 'project.todo.type'
-    _description = 'Type of todo'
-
+class ProjectTodo(models.Model):
+    _name = 'diary.item'
+    _description = 'Diary Item'
 
     name = fields.Char()
-    importance = fields.Integer()
+    date = fields.Datetime()
+    content = fields.Text()
+
