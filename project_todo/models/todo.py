@@ -15,3 +15,7 @@ class ProjectTodo(models.Model):
         string='type Of Todo', 
         comodel_name='project.todo.type')
 
+
+    def show_students(self):
+        self.env.ref('')
+

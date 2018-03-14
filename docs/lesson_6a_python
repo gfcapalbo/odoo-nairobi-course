@@ -1,0 +1,29 @@
+ Python Basics:
+
+	Flake8
+
+		sudo apt-get install flake8
+		use:
+			flake8 my_program.py
+
+	Datatypes : int , float, str, list, tuple, dictionary
+
+	Indentation
+
+	functions
+
+		def sum(a,b):
+		    c=a+b
+		    return c
+
+	Isinstance
+		isinstance(c, int)
+                isinstance(c, str)
+
+	Essential Python core functions
+
+	  https://docs.python.org/2/library/functions.html
+
+	Python types
+          https://docs.python.org/2/library/stdtypes.html
+
