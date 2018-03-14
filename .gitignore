@@ -1,0 +1,12 @@
+*.pyc
+*.swp
+/list.txt
+/src
+/*.sh
+/.idea
+/00*
+/external
+/.backup
+/trash
+*old.po
+.coverage*

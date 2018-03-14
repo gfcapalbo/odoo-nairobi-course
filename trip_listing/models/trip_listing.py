@@ -1,23 +1,8 @@
 # -*- coding: utf-8 -*-
-#
-from openerp import SUPERUSER_ID
+
 import time
 from datetime import datetime
 from openerp import models, fields, api, _
-from bs4 import BeautifulSoup
-from datetime import date
-from openerp.exceptions import UserError
-from openerp import http
-from openerp.http import Controller, route, request, Response
-import werkzeug.utils
-import werkzeug.wrappers
-import datetime
-import re
-import json
-import requests
-import cgi
-import random
-from africastalking.AfricasTalkingGateway import (AfricasTalkingGateway, AfricasTalkingGatewayException)
 
 TRIP_LISTING_TYPES = [
     ("draft", "Draft"),

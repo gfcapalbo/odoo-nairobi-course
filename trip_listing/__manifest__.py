@@ -5,7 +5,7 @@
 {
     'name': 'Trip Listings',
     'version': '10.0.1.0.0',
-    'summary': 'TRIPFINDER APIs',
+    'summary': 'Odoo Course 2018 Lesson 8 Code',
     'author': 'Sunflower IT',
     'website': 'http://sunflowerweb.nl',
     'category': 'Enterprise Specific Management',
