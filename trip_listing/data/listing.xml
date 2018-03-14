@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.sequence" id="seq_trip_listing_instance">
+            <field name="name">Trip Listing Sequence</field>
+            <field name="code">trip.listing</field>
+            <field name="padding" eval="4"/>
+            <field name="prefix">TL/</field>
+        </record>
+    </data>
+</odoo>

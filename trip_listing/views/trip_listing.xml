@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- TOP MENU -->
+        <menuitem name="Listings"
+            id="menu_listing"
+            sequence="3"/>
+
+        <!-- Side Menu: first level -->
+        <menuitem name="Trip Listings"
+            parent="menu_listing"
+            id="menu_listing_listing"
+            sequence="1"/>
+
+        <!-- Trip Listing Tree View -->
+        <record id="trip_listing_tree_view" model="ir.ui.view">
+            <field name="name">trip.listing.tree</field>
+            <field name="model">trip.listing</field>
+            <field name="arch" type="xml">
+                <tree string="Trip Listing">
+					<field name="name"/>
+                    <field name="title"/>
+					<field name="partner_id"/>
+                    <field name="category_id"/>
+                    <field name="venue"/>
+                    <field name="city_id"/>
+                    <field name="location"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                     <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="trip_listing_form_view" model="ir.ui.view">
+            <field name="name">trip.listing.form</field>
+            <field name="model">trip.listing</field>
+            <field name="arch" type="xml">
+                <form string="Trip Listings" version="10.0">
+                    <header>
+                        <button string="Confirm Listing" type="object" class="oe_highlight" name="confirm_listing" states="draft"/>
+                        <button string="Activate Listing" type="object" class="oe_highlight" name="activate_listing" states="confirm"/>
+                        <button string="Cancel Listing" type="object" class="oe_highlight" name="cancel_listing" states="confirm, active"/>
+                        <button string="Set To Done" type="object" class="oe_highlight" name="done_listing" states="active"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <field name="feature_image" widget="image" class="oe_avatar"/>
+                        <div class="oe_title">
+                            <h1>
+                                <h1><field name="title"/></h1>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="name" class="oe_inline" readonly="1"/>
+                            <field name="partner_id"/>
+                            <field name="category_id"/>
+                            <field name="phone"/>
+                            <field name="email" placeholder="admin@admin.com"/>
+                            <field name="website"/>
+                            <field name="venue"/>
+                            <field name="city_id"/>
+                            <field name="location"/>
+                            <field name="attendees"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Listing Description" name="description">
+                                <field name="description"/>
+                            </page>
+                            <page string="Listing Images" name="images">
+                                <field name="image_ids" colspan="4" nolabel="1">
+                                    <tree string="Images" editable="bottom">
+                                        <field name="listing_id"/>
+                                        <field name="image" widget="image"/>
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Trip Listing Graph View -->
+        <record model="ir.ui.view" id="view_trip_listing_graph">
+            <field name="name">trip.listing.graph</field>
+            <field name="model">trip.listing</field>
+            <field name="arch" type="xml">
+                <graph string="Trip Listing Statistics">
+                    <field name="partner_id" type="row"/>
+                    <field name="city_id" type="col"/>
+                    <!--<field name="attendees" type="measure"/>-->
+                </graph>
+            </field>
+        </record>
+
+        <!-- Trip Listing Pivot View -->
+        <record model="ir.ui.view" id="view_trip_listing_pivot">
+            <field name="name">trip.listing.pivot</field>
+            <field name="model">trip.listing</field>
+            <field name="arch" type="xml">
+                <pivot string="Trip Listing Pivot">
+                    <field name="title" type="row"/>
+                    <field name="attendees" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- Trip Listing Kanban View -->
+         <record id='trip_listing_view_kanban' model='ir.ui.view'>
+            <field name="name">trip.listing.kanban</field>
+            <field name="model">trip.listing</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="title" />
+                    <field name="partner_id" />
+                    <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src="kanban_image('trip.listing', 'feature_image', record.id.value)"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <span t-if="record.title.value">[<field name="name"/>]</span>
+                                    <field name="title"/>
+                                </strong>
+                                <div name="tags"/>
+                                <ul t-if="record.partner_id.value">
+                                    <li>Created By: <field name="partner_id"/></li>
+                                </ul>
+                                <div name="tags"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Trip Listing Calendar View -->
+        <record model="ir.ui.view" id="trip_listing_calendar">
+            <field name="name">trip.listing.calendar</field>
+            <field name="model">trip.listing</field>
+            <field name="arch" type="xml">
+                <calendar color="category_id" date_start="date_start" date_stop="date_end" string="Trip Organizer">
+                    <field name="name"/>
+                    <field name="category_id"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- Trip Listing Search View -->
+        <record id="view_trip_listing_search" model="ir.ui.view">
+            <field name="name">trip.listing.search</field>
+            <field name="model">trip.listing</field>
+            <field name="arch" type="xml">
+                <search string="Trip Listing">
+                     <field name="name" string="Title" filter_domain="[('title','ilike',self)]"/>
+                     <separator orientation="vertical"/>
+                     <filter string="Active" domain="[('state','=','active')]" help="Show Active listings "/>
+                     <filter string="Confirmed" name="confirm" domain="[('state','=','confirm')]" help="Show Confirmed listings"/>
+                     <separator orientation="vertical"/>
+                    <group expand="1" string="Group By">
+                        <filter string="City" context="{'group_by':'city_id'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Trip Listing Action -->
+        <record id="action_trip_listing" model="ir.actions.act_window">
+            <field name="name">Trip Listings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">trip.listing</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Listings"
+            action="action_trip_listing"
+            parent="menu_listing_listing"
+            id="menu_trip_listing_listing"
+            sequence="1"/>
+
+        <!-- LISTING CATEGORY -->
+
+        <record id="trip_listing_category_tree_view" model="ir.ui.view">
+            <field name="name">trip.listing.category.tree</field>
+            <field name="model">trip.listing.category</field>
+            <field name="arch" type="xml">
+                <tree string="Trip Listing Category">
+                    <field name="category_image" widget="image"/>
+					<field name="name"/>
+                    <field name="icon"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="trip_listing_category_form_view" model="ir.ui.view">
+            <field name="name">trip.listing.category.form</field>
+            <field name="model">trip.listing.category</field>
+            <field name="arch" type="xml">
+                <form string="Trip Listing Category" version="10.0">
+                    <sheet>
+                        <field name="category_image" widget="image" class="oe_avatar"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="icon"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_trip_listing_category" model="ir.actions.act_window">
+            <field name="name">Trip Listing Categories</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">trip.listing.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Listing Categories"
+            action="action_trip_listing_category"
+            parent="menu_listing_listing"
+            id="menu_trip_listing_listing_category"
+            sequence="3"/>
+
+        <!-- LISTING IMAGE -->
+
+        <record id="trip_listing_image_tree_view" model="ir.ui.view">
+            <field name="name">trip.listing.image.tree</field>
+            <field name="model">trip.listing.image</field>
+            <field name="arch" type="xml">
+                <tree string="Trip Listing Image">
+                    <field name="listing_id"/>
+					<field name="name"/>
+                    <field name="image" widget="image"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="trip_listing_image_form_view" model="ir.ui.view">
+            <field name="name">trip.listing.image.form</field>
+            <field name="model">trip.listing.image</field>
+            <field name="arch" type="xml">
+                <form string="Trip Listing Image" version="10.0">
+                    <sheet>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="listing_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_trip_listing_image" model="ir.actions.act_window">
+            <field name="name">Trip Listing Images</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">trip.listing.image</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Listing Images"
+            action="action_trip_listing_image"
+            parent="menu_listing_listing"
+            id="menu_trip_listing_listing_image"
+            sequence="4"/>
+
+
+        <!-- LISTING CITY -->
+
+        <record id="trip_listing_city_tree_view" model="ir.ui.view">
+            <field name="name">trip.listing.city_id.tree</field>
+            <field name="model">trip.listing.city</field>
+            <field name="arch" type="xml">
+                <tree string="Trip Listing City">
+					<field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="trip_listing_city_form_view" model="ir.ui.view">
+            <field name="name">trip.listing.city.form</field>
+            <field name="model">trip.listing.city</field>
+            <field name="arch" type="xml">
+                <form string="Trip Listing City" version="10.0">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_trip_listing_city" model="ir.actions.act_window">
+            <field name="name">Cities</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">trip.listing.city</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Listing Cities"
+            action="action_trip_listing_city"
+            parent="menu_listing_listing"
+            id="menu_trip_listing_listing_city"
+            sequence="5"/>
+    </data>
+</odoo>
+
+
