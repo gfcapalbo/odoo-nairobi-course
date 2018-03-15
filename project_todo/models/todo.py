@@ -13,7 +13,15 @@ class ProjectTodo(models.Model):
     user = fields.Many2one('res.users', required=True)
     todo_type = fields.Many2one(
         string='type Of Todo', 
+
         comodel_name='project.todo.type')
+    done = fields.Boolean(default=False)
+
+    def do_todo(self):
+        import pudb
+        pudb.set_trace()
+        self.write({'done': True})
+
 
     @api.multi
     def server_action_was_here(self):

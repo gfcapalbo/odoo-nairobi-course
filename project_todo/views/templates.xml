@@ -30,9 +30,14 @@
 					<field name="name" />
 					<field name="user" />
 					<field name="todo_type" />
+					<field name="done" />
 				</group>
 				<group>
 					<field name="text_todo" />
+				</group>
+				<group>
+					<button type="object" name="do_todo" string="Do something" />
+					<button type="action" name="%(project_todo.show_todo_list)d" string="Back to list" />
 				</group>
 			</form>
 		</field>
