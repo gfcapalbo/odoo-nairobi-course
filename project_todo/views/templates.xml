@@ -20,6 +20,17 @@
 		</field>
 	</record>
 
+	<act_window id="show_todo_list"
+		name="todos"
+		res_model="project.todo"
+		view_mode="list,form"
+		/>
+
+	<menuitem id="todo_menu"
+		parent="project.menu_main_pm" 
+		action="show_todo_list"		
+		/>
+
 	<!-- Minimal form view a record of type ir.ui.view -->
 	<record id="form_todos" model="ir.ui.view">
 		<field name="name">Todo</field>
@@ -42,16 +53,5 @@
 			</form>
 		</field>
 	</record>
-
-	<act_window id="show_todo_list"
-		name="todos"
-		res_model="project.todo"
-		view_mode="list,form"
-		/>
-
-	<menuitem id="todo_menu"
-		parent="project.menu_main_pm" 
-		action="show_todo_list"		
-		/>
 
 </odoo>
