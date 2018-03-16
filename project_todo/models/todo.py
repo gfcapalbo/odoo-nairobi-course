@@ -18,8 +18,6 @@ class ProjectTodo(models.Model):
     done = fields.Boolean(default=False)
 
     def do_todo(self):
-        import pudb
-        pudb.set_trace()
         self.write({'done': True})
 
 
