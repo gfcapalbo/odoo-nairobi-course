@@ -16,10 +16,11 @@ Model  (odoo) Inheritance
 
 Classical inheritance
 
-When using the _inherit and _name attributes together, Odoo creates a new model using the existing one (provided via _inherit) as a base. The new model gets all the fields, methods and meta-information (defaults & al) from its base.
+When using the _inherit and _name attributes together, Odoo creates a new model using the existing one (provided via _inherit) as a base. The new model gets all the fields, methods and meta-information (defaults & al) from its base.::
 
-                so :   inherit='sale.order'
-                        _name='sale.order.gio'
+       
+                inherit='sale.order'
+               _name='sale.order.gio'
 
         wil create a class of models.Model different from sale.order,but with all it's attributes.
 
@@ -68,25 +69,21 @@ https://github.com/OCA/OCB/blob/10.0/addons/project_issue/models/project_project
 We will use inheritance in our TODO module
 ------------------------------------------
 
-# after adding a module dependency to project (where the model we are iheriting is defined)
+after adding a module dependency to project (where the model we are iheriting is defined)::
 
 
-class ProjectProject(models.Model):
-    _name = 'project.project'    #OR NOTHING IS BETTER (less possibilities of mistakes)
-    _inherit = 'project.project'
+   class ProjectProject(models.Model):
+       _name = 'project.project'    #OR NOTHING IS BETTER (less possibilities of mistakes)
+       _inherit = 'project.project'
+       # now we add a couple of fields
 
+       todo_count = fields.boolean(compute=_compute_has_todos)
+       associated_todos = fields.Many2many('project.todo')
 
-    # now we add a couple of fields
-
-    todo_count = fields.boolean(compute=_compute_has_todos)
-    associated_todos = fields.Many2many('project.todo')
-
-
-    # we could  now  show these fields in ANY view that is of model project.project
-    # we will see this in the  view inheritance lesson this afternoon, in the meantime we will
-    # add them toa view via interface.
-
-    # ADD FIELDS TO INTERFACE
+       # we could  now  show these fields in ANY view that is of model project.project
+       # we will see this in the  view inheritance lesson this afternoon, in the meantime we will
+       # add them toa view via interface.
+       # ADD FIELDS TO INTERFACE
 
 
 PARTIAL MODIFICATION OF FIELD MODIFICATION
@@ -120,7 +117,7 @@ THe official super documentation:
 
         https://docs.python.org/2/library/functions.html#super
 
-In odoo:
+In odoo:::
         
         super(classname, self).method()  will call and return the method() of it's parent.
         
@@ -133,7 +130,9 @@ In odoo:
 
 logical placement of super. In writes. In Creates.
 --------------------------------------------------
-.. code-block
+
+write and create pseudo-code::
+
     @api.multi
     def write(self, vals):
         code code code probably modifying vals
@@ -142,7 +141,7 @@ logical placement of super. In writes. In Creates.
         res=super(ProjectProject, self)
         code code , probably using "res"
         return res
-.. code-block
+        
     @api.model
     def create(self):
         # Now we call super, theparent write that has been overwritten
@@ -150,7 +149,7 @@ logical placement of super. In writes. In Creates.
         res=super(ProjectProject, self)
         code code , probably using "res"
         return res
-
+::
 
 Let's overwrite create and write in our project extension
 _________________________________________________________
