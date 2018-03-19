@@ -133,6 +133,8 @@ In odoo:
 
 logical placement of super. In writes. In Creates.
 --------------------------------------------------
+
+    ::
     @api.multi
     def write(self, vals):
         code code code probably modifying vals
@@ -142,7 +144,6 @@ logical placement of super. In writes. In Creates.
         code code , probably using "res"
         return res
 
-
     @api.model
     def create(self):
         # Now we call super, theparent write that has been overwritten
@@ -150,7 +151,7 @@ logical placement of super. In writes. In Creates.
         res=super(ProjectProject, self)
         code code , probably using "res"
         return res
-
+   ::
 
 Let's overwrite create and write in our project extension
 _________________________________________________________
