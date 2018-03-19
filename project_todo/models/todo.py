@@ -19,7 +19,7 @@ class ProjectTodo(models.Model):
         compute='_compute_days_left',
         inverse='_inverse_days_left'
     )
-    is_urgent = fields.Boolean(compute='_compute_is_urgent' store=True)
+    is_urgent = fields.Boolean(compute='_compute_is_urgent' ,  store=True)
     todo_type_importance = fields.Integer(related='todo_type.importance',  readonly=True)
 
     @api.depends('deadline')
