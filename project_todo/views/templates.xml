@@ -32,6 +32,7 @@
 				<group>
 					<field name="name" />
 					<field name="user" />
+					<field name="project" />
 					<field name="todo_type" />
 					<field name="deadline" />
 					<field name="days_left" />
