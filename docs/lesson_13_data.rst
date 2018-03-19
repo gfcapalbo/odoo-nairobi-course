@@ -133,7 +133,7 @@ In odoo:
 
 logical placement of super. In writes. In Creates.
 --------------------------------------------------
-::
+.. code-block
     @api.multi
     def write(self, vals):
         code code code probably modifying vals
@@ -142,7 +142,7 @@ logical placement of super. In writes. In Creates.
         res=super(ProjectProject, self)
         code code , probably using "res"
         return res
-
+.. code-block
     @api.model
     def create(self):
         # Now we call super, theparent write that has been overwritten
@@ -150,14 +150,15 @@ logical placement of super. In writes. In Creates.
         res=super(ProjectProject, self)
         code code , probably using "res"
         return res
-::
+
 
 Let's overwrite create and write in our project extension
 _________________________________________________________
 
 
 
-
+OBSERVATIONS
+------------
 
 -Any method in the parent class can be overwitten and modified.
 -Poor modularity of the parent function structure may cause difficulties, and force us to present an MR to the parent module.
