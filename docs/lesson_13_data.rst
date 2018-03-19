@@ -89,6 +89,15 @@ class ProjectProject(models.Model):
     # ADD FIELDS TO INTERFACE
 
 
+PARTIAL MODIFICATION OF FIELD MODIFICATION
+__________________________________________
+
+
+if you have a field that already exists , by redefining it you can change or add only some of it's attributes.
+
+ color = fields.integer(required=True)    # now all projects must have a color.
+
+
 
 how to use odoo inheritance to extend create() - calling super()
 ----------------------------------------------------------------
@@ -126,7 +135,7 @@ logical placement of super. In writes. In Creates.
 --------------------------------------------------
     @api.multi
     def write(self, vals):
-        code code code probably modifying res
+        code code code probably modifying vals
         # Now we call super, the parent write that has been overwritten
         # the super chain should not be broken
         res=super(ProjectProject, self)
@@ -136,7 +145,6 @@ logical placement of super. In writes. In Creates.
 
     @api.model
     def create(self):
-        code code code probably modifying res
         # Now we call super, theparent write that has been overwritten
         # the super chain should not be broken
         res=super(ProjectProject, self)
@@ -144,8 +152,8 @@ logical placement of super. In writes. In Creates.
         return res
 
 
-Let's overwrite create and write in 
-______________________________________
+Let's overwrite create and write in our project extension
+_________________________________________________________
 
 
 
@@ -155,6 +163,12 @@ ______________________________________
 -Poor modularity of the parent function structure may cause difficulties, and force us to present an MR to the parent module.
 - the logical order of calls is determined by the module inheritance chain
 
+
+GROUP EXERCISE:
+
+Project project model definition in project has some interesting inheritances, read together:
+https://github.com/OCA/OCB/blob/10.0/addons/project/models/project.py#L52
+and line 53
 
 
 
@@ -170,3 +184,5 @@ EXERCISE:
 
 2 - Extend res users and add whatever you please to it
 
+
+3- implement some sort of 'default'  by overwriting create and explain why is this worse than using the default attribute in the field definition.
