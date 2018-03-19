@@ -32,13 +32,15 @@ class ProjectTodo(models.Model):
 
 
     #if I change days left, the deadline needs to move!!!!
-
     def _inverse_days_left(self):
         today = fields.Date.from_string(fields.Date.today())
         for this in self:
             d = today - datetime.timedelta(days=this.days_left)
             this.deadline = fields.Date.to_string(d)
 
+            
+
+    @api.depends('days_left')
     def _compute_is_urgent(self):
         for this in self:
             this.is_urgent = True if this.days_left < 3  else False 
