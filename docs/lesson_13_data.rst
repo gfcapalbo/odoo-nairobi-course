@@ -46,52 +46,127 @@ and methods needed for the threads we see in the interface under the forms.
 
 
 When creating custom modules , the extensions are the most common inheritance needed.
+Method ovverriding by replacing the original method in odoo seems like an extremly rare usecase , what we want is an extension.
 
+    An example:
+      -    in the model sale.order we want to extend creation, after creating the sale order, we want to also set the value of   a new field we added.
+        so we create a folder in /models and define a class that inherits models.Model. (python inheritance)
+
+
+A simple example of inheritance in project
+__________________________________________
+
+original project.project class:
+https://github.com/OCA/OCB/blob/10.0/addons/project/models/project.py
+
+
+Project project class is inherited in module project_issue
+https://github.com/OCA/OCB/blob/10.0/addons/project_issue/models/project_project.py
+
+
+
+We will use inheritance in our TODO module
+------------------------------------------
+
+# after adding a module dependency to project (where the model we are iheriting is defined)
+
+
+class ProjectProject(models.Model):
+    _name = 'project.project'    #OR NOTHING IS BETTER (less possibilities of mistakes)
+    _inherit = 'project.project'
+
+
+    # now we add a couple of fields
+
+    todo_count = fields.boolean(compute=_compute_has_todos)
+    associated_todos = fields.Many2many('project.todo')
+
+
+    # we could  now  show these fields in ANY view that is of model project.project
+    # we will see this in the  view inheritance lesson this afternoon, in the meantime we will
+    # add them toa view via interface.
+
+    # ADD FIELDS TO INTERFACE
 
 
 
 how to use odoo inheritance to extend create() - calling super()
 ----------------------------------------------------------------
-We refer to extension inheritance.
 
 
-Method ovverriding by replacing the original method in odoo seems like an extremly rare usecase , what we want is an extension.
+SUPER
+-----
+Super is used to return a proxy object that delegates method calls to a parent or sibling class of type. This is useful for accessing inherited methods that have been overridden in a class. The search order is same as that used by getattr() except that the type itself is skipped.”
 
-    Some examples:
-        in the model sale.order we want to extend creation, after creating the sale order, we want to also set the value of 
-        a new field we added.
+the super function can be used to gain access to inherited methods – from a parent or sibling class – that has been overwritten in a class object.
 
-        so we create a folder in /models and define a class that inherits models.Model. (python inheritance)
+A simple example of super in python:
 
+        https://www.programiz.com/python-programming/methods/built-in/super
 
-
-
-
-- logical placement of super. In writes. In Creates.
+(the __init__ function is a special function, a *constructor* , something that happens when we create an instance of the class we are describing)
 
 
-_usecase:
+THe official super documentation:
 
+        https://docs.python.org/2/library/functions.html#super
 
+In odoo:
+        
+        super(classname, self).method()  will call and return the method() of it's parent.
+        
 
-
-
-ir.sequence
------------
-
-The Odoo Exceptions structure: raise ValidationError 
-----------------------------------------------------
-When an exception is raised in python,  it propagates up the call stack,
-In Odoo, the RPC layer that answers the calls made by the web client catches all exceptions
-and, depending on the exception class, it will trigger different possible behaviors on the
-web client.
+        This is managed by odoo. "Normal" python super would call the method of the class it inherits, in our case only model.Models. But the odoo framework manages inheritance by checking the attribute inheritand will find our parent class.
 
 
 
 
 
+logical placement of super. In writes. In Creates.
+--------------------------------------------------
+    @api.multi
+    def write(self, vals):
+        code code code probably modifying res
+        # Now we call super, the parent write that has been overwritten
+        # the super chain should not be broken
+        res=super(ProjectProject, self)
+        code code , probably using "res"
+        return res
+
+
+    @api.model
+    def create(self):
+        code code code probably modifying res
+        # Now we call super, theparent write that has been overwritten
+        # the super chain should not be broken
+        res=super(ProjectProject, self)
+        code code , probably using "res"
+        return res
+
+
+Let's overwrite create and write in 
+______________________________________
 
 
 
-- selection_add
----------------
+
+
+-Any method in the parent class can be overwitten and modified.
+-Poor modularity of the parent function structure may cause difficulties, and force us to present an MR to the parent module.
+- the logical order of calls is determined by the module inheritance chain
+
+
+
+
+
+
+EXERCISE:
+
+0- make seqence mandatory field in project project, and make it's default 44 , verify in interface.
+
+1- we now have _compute_todo_count to calculate how many todos a project has
+   overwrite _compute_task_count  in project.project to become the computed field for  
+   todo_count
+
+2 - Extend res users and add whatever you please to it
+
