@@ -25,16 +25,21 @@ class ProjectProject(models.Model):
         #call parent write
         for this in self:
             # if there are associated todos sequence is 1
-            if this.associated_todos:
+            if vals.get('associated_todos', False):
                 vals['sequence'] = 1
+            res = super(ProjectProject, this).write(vals)
+            if this.todo_count > 0:
+                vals['sequence'] = 1
+            else:
+                vals['sequence'] = 500
             res = super(ProjectProject, this).write(vals)
         return res
 
 
     @api.model
-    def create(self):
+    def create(self, vals):
         #call parent create
-        res = super(ProjectProject, this).create()
+        res = super(ProjectProject, self).create(vals)
         # dosomething!
         # NOTE: no active record pattern here!
         # monochrome  projects!
