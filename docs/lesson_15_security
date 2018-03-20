@@ -1,0 +1,110 @@
+ODOO ACL - understand how it works.
+===================================
+
+LAYER 1 -- VALID ON MODEL
+-------------------------
+
+Access rule , ir.model.access  per group   
+
+
+LAYER 2   -- VALID ON RECORD
+------------------------------
+this layer is record                    
+Access rule per group ir.rule
+
+ 
+
+LAYER 3 --- VALID ON RECORD
+---------------------------
+
+This layer is also per record
+
+Access Rule  Global  (ir.rule)
+
+
+not every layer needs to be present . only the first one needs to be present to have access
+
+very important
+
+If you have no permissions on layer 1 access is denied
+
+If you have nothing in layer 2 or 3 access , bu you do have in layer 2 and 3  you have access.
+
+Take a look at access groups in interface
+________________________________________
+
+level 2 and 3
+     ir.rule (Access On the record level)
+
+Settings > technical > Security > Record Rules
+
+
+level 1
+
+     Access Rule  ir.model.rule (Access on the model level)
+
+Settings > Security > Access Control List
+
+
+
+ADDING SECURITY 
+_________________________________
+
+
+first we read together the project.project group and security rules.
+
+ir.model.access (record level) for project module
+http://github.com/OCA/OCB/blob/10.0/addons/project/security/ir.model.access.csv
+Groups (ir.groups) and ir.rule (on the record level)
+https://github.com/OCA/OCB/blob/10.0/addons/project/security/project_security.xml
+
+
+
+
+Create a New group "todo manager"
+
+
+
+
+todo manager will be able to create and delete todos
+non-todo manager will be able just to read and write todos
+
+(switch csvand xml)
+
+
+(see code)
+
+
+
+Another level of security -The groups keyword in XML
+----------------------------------------------------
+Once added a group we can use it in actions, fields and menues as an attribute to 
+All groups are identified by their fully qualified XML_ID
+
+	
+grep -r "groups=" | grep xml
+
+
+CHeck out examples in code
+
+
+
+
+Running methods as sudo or specific user
+________________________________________
+
+
+self.env['mrp.product.produce'].sudo(self.user_mrp_user).write({})
+
+The write will be done taking into account the permissionsof the user.
+Often used in test but should be used more in general.
+
+
+Running as Admin
+----------------
+
+self.env['sale.order'].sudo()
+
+
+
+

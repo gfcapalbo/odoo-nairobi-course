@@ -1,1 +1,3 @@
-"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_todo_managers,project_todo_managers,model_project_todo,project_todo.group_project_todo_managers,1,1,1,1
+access_project_todo_users,project_todo_users,model_project_todo,project_todo.group_project_todo_users,1,1,0,0
