@@ -2,17 +2,17 @@
 # Copyright 2018 Therp BV <https://therp.nl>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
-    "name": "Diary Items",
+    "name": "Data Customizations",
     "version": "10.0.1.0.0",
     "author": "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Personal",
-    "summary": "Allows to log diary items",
+    "summary": "Customize some data items",
     "depends": [
         'base',
     ],
     "data": [
-        'views/diary_item.xml',
+        'data/data.xml',
     ],
     "qweb": [
     ],
