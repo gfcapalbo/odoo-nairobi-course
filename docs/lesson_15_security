@@ -106,5 +106,35 @@ Running as Admin
 self.env['sale.order'].sudo()
 
 
+Writing on a one2many and many2many field
+------------------------------------------
+https://www.odoo.com/documentation/8.0/reference/orm.html
+
+
+EXERCISES:
+1. in the interface we created a ir.rule that is associated 
+to the todo_user group and allows a user that belongs to this group to only see
+his own todos. Write the record that creates such ir.rule . in security.xml
+
+< record id="project_todo_user_only" model="ir.rule" >
+   <field name="name">Todo user only</field>
+   <field name="model_id" ref="model_project_todo"/>
+   <field name="domain_force">[('user', '=', user.id)]</field>
+   <field name="perm_read">True</field>
+   <field name="perm_create">False</field>
+   <field name="perm_write">True</field>
+   <field name="perm_delete">False</field>
+   <field name="groups" eval="[(4, ref('project_todo.group_project_todo_users'))]"/>
+
+</record>
+
+2. Make todo menuitem visible only to group manager
+
+3 Make another menuitem visible only to group user and call it my todos.
+
+
+
+
+
 
 
