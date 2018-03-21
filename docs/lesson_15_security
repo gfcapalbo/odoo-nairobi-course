@@ -99,6 +99,14 @@ self.env['mrp.product.produce'].sudo(self.user_mrp_user).write({})
 The write will be done taking into account the permissionsof the user.
 Often used in test but should be used more in general.
 
+Small postgres commands to make all users with password 'a'
+___________________________________________________________
+
+psql {dmanme}
+update res_users set password='a';
+\q
+
+
 
 Running as Admin
 ----------------
