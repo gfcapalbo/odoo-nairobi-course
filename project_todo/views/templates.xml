@@ -47,7 +47,13 @@
 	</record>
 
 	<act_window id="show_todo_list"
-		name="todos"
+		name="Todos"
+		res_model="project.todo"
+		view_mode="list,form"
+		/>
+
+	<act_window id="show_todo_list_users"
+		name="My Todos"
 		res_model="project.todo"
 		view_mode="list,form"
 		/>
@@ -55,7 +61,25 @@
 	<menuitem id="todo_menu"
 		parent="project.menu_main_pm" 
 		action="show_todo_list"		
+		groups="project_todo.group_project_todo_managers"
 		/>
+
+	<menuitem id="todo_stats_menu"
+		parent="project_todo.todo_menu"
+		action="project_todo.show_todo_list" sequence="20"/>
+
+	<menuitem id="todo_menu_show_list"
+		parent="project_todo.todo_menu"
+		action="show_todo_list"		
+		groups="project_todo.group_project_todo_managers"
+		/>
+
+	<menuitem id="todo_menu_just_users"
+		parent="project.menu_main_pm" 
+		action="show_todo_list_users"		
+		groups="project_todo.group_project_todo_users"
+		/>
+
 
 	
 </odoo>

@@ -14,6 +14,8 @@
     "data": [
         # 'data/todo_data.xml',
         'data/server_actions.xml',
+        'security/security.xml',
+        'security/ir.model.access.csv',
         'views/templates.xml',
         'security/security.xml',
         'security/ir.model.access.csv',

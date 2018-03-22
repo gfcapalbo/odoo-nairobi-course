@@ -19,8 +19,8 @@ class ProjectTodoStats(models.TransientModel):
     _name = "project.todo.stats"
     _description = " statistics for project todo"
 
-    user_id = fields.Date()
-    date = fields.Date()
+    user_id = fields.Many2one('res.users', string='Stats Of')
+    date = fields.Date(string='After Date')
 
 
     def launch_stats(self):
