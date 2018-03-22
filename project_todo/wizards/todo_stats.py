@@ -51,8 +51,6 @@ class ProjectTodoStats(models.TransientModel):
     """
     @api.model
     def default_get(self, fields_list):
-        import pudb
-        pudb.set_trace()
         current_stat_obj = None
         result = super(ProjectTodoStats, self).default_get(fields_list=fields_list)
         project_todo_stat_model = self.env['project.todo.stats']
