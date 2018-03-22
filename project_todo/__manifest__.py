@@ -17,6 +17,7 @@
         'views/templates.xml',
         'security/security.xml',
         'security/ir.model.access.csv',
+        'wizards/todo_stats_view.xml',
     ],
     "qweb": [
     ],
