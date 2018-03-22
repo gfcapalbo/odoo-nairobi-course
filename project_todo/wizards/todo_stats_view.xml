@@ -41,11 +41,11 @@
 			
 			<xpath expr="//group" position="after">
 
-				<separator name="Calculate Stats" />
+				<separator string="Calculate Stats" />
 				<button type="object" name="launch_stats" string="Launch stats using calling a function that returns an action" />
 				<button type="action" name="%(project_todo.project_todo_stats_action)d" string="Launch stats by using a button that just calls an action directly" />
 				
-				<separator name="Just for fun also the Button that shows list from lesson 10"/>
+				<separator string="Just for fun also the Button that shows list from lesson 10"/>
 				<button type="action" name="%(project_todo.show_todo_list)d" string="Back to list" />
 
 			</xpath>
@@ -65,6 +65,9 @@
 				<group>
 					<field name="user_id"  readonly="True"/>
 					<field name="from_date" readonly="True"/>
+					<field name="how_many_urgent" readonly="True"/>
+					<field name="how_many_i_made" readonly="True"/>
+					<field name="how_many_are_mine" readonly="True"/>
 				</group>
 				<group>
 					<button special="cancel" string="Close Calculations" class="oe_link"/>

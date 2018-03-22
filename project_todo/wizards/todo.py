@@ -39,8 +39,6 @@ class ProjectTodo(models.Model):
 
     @api.multi
     def launch_stats(self):
-        import pudb
-        pudb.set_trace()
         self.ensure_one()
         """
         functions can return actions, it's a valid alternative 

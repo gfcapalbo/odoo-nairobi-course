@@ -10,8 +10,11 @@ from odoo import api, models, fields
 # how many done 
 # how many created by him
 # how many created that where given to him
-# How many modified by him
 
+
+
+# A TRANSIENT MODEL is just like a normal model. but it's existence in the database 
+# has a limited timespan. The transient model record will be removed after 
 
 
 class ProjectTodoStats(models.TransientModel):
@@ -21,6 +24,9 @@ class ProjectTodoStats(models.TransientModel):
 
     user_id = fields.Many2one('res.users', string='Stats Of')
     from_date = fields.Date(string='After Date')
+    how_many_urgent = fields.Integer(string='Urgent Todos')
+    how_many_i_made = fields.Integer(string='Todos Created')
+    how_many_are_mine = fields.Integer('Todos assigned')
 
 
     def launch_stats(self):
@@ -29,8 +35,6 @@ class ProjectTodoStats(models.TransientModel):
         to using menues to launch actions. and can be used to implement 
         multi popup types of situations (your context will follow you around)
         """
-        import pudb
-        pudb.set_trace()
         return {
                 'type': 'ir.actions.act_window',
                 'res_model':  'project.todo',
@@ -47,20 +51,48 @@ class ProjectTodoStats(models.TransientModel):
     """
     @api.model
     def default_get(self, fields_list):
-        import pudb
-        pudb.set_trace()
         result = super(ProjectTodoStats, self).default_get(fields_list=fields_list)
         project_todo_stat_model = self.env['project.todo.stats']
-        current_stat_obj = project_todo_stat_model.browse(self.env.context['params']['id'])
+        # exercise breakpoint here :  Trace and view context
+        if self.env.context.get('active_id', False) and \
+                self.env.context.get('active_model', False) == 'project.todo':
+            current_stat_obj = project_todo_stat_model.browse(
+                    self.env.context['active_id'])
+        elif 'id' in self.env.context.get('params').keys():
+            current_stat_obj = project_todo_stat_model.browse(self.env.context['params']['id'])
         # EXERCISE remove the .id from user and interpret error message
-
         result['user_id'] = current_stat_obj.user_id.id
         result['from_date'] = current_stat_obj.from_date
         return result
 
 
     def do_stats(self):
-        import pudb
-        pudb.set_trace()
-        return True
-
+        from_domain = ()
+        user_domain = ()
+        if self.from_date:
+            from_domain = ('create_date', '>' , self.from_date)
+        if self.user_id:
+            # EXERCISE : explain
+            user_domain = ('user' , '=', self.user_id.id)
+        todo_model = self.env['project.todo']
+        domain_urgent =  [('is_urgent', '=', True)]
+        if from_domain:
+            domain_urgent.append(from_domain)
+        if user_domain:
+            domain_urgent.append(user_domain)
+        how_many_urgent = len(todo_model.search(domain_urgent))
+        self.write({
+            'how_many_urgent' : how_many_urgent,
+            'how_many_i_made' : how_many_urgent,  # EXERCISE: MAKE CODE
+            'how_many_are_mine' : how_many_urgent,  # EXERCISE MAKE CODE
+        })
+        return {
+                'type': 'ir.actions.act_window',
+                'res_model':  'project.todo.stats',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'target': 'new',
+                # EXERCISE : EXPLAIN
+                "view_id": self.env.ref('project_todo.project_todo_stats_form_results').id,
+                "res_id": self.id
+        }
