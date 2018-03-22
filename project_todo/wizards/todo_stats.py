@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-from odoo import models
+from odoo import models, fields
 
 
 
@@ -41,4 +41,5 @@ class ProjectTodoStats(models.TransientModel):
 
 
     def do_stats(self):
+        return True
 
