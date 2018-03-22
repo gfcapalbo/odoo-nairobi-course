@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="project_todo_stats_form"  model="ir_ui_view">
+		<field name="name">do</field>
+		<field name="model">sale.order.import</field>
+		<field name="arch"  type="xml">
+			<form string="Stats selection">
+				<group>
+					<field name="user_id" />
+					<field name="date"/>
+				</group>
+				<group>
+					<button type="object" name="do_stats"
+						class="oe_highlight" />
+					<button special="cancel" string="Cancel" class="oe_link"/>
+				</group>
+			</form>
+		</field>
+	</record>
+
+	<!-- to show different ways of launching an action we have created a menu
+	     but now we will also launch it by placing a button on the form.
+ 	     Important. We can make just a action button
+			Or we can make a object button that launches a function that then 
+			launches an action.
+	     We will do both buttons and place them in our TODO formview, 
+	     by using the view inheritance we learned in XPATH lesson
+	-->
+
+	<record id="todo_form_extend_with_2_buttons" model="ir.ui.view">
+		<field name="name">Add two buttons</field>
+		<field name="inherit_id" ref="project_todo.form_todos"/>
+		<field name="model">ir.ui.view</field>
+		<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='todo_type_importance']" position="after">
+				<separator name="Calculate Stats" />
+				<button type="object" name="launch_stats" string="Launch stats using calling a function that returns an action" />
+			<button type="action" name="%(project_todo.show_todo_list)d" string="Launch stats by using a button that just calls an action directly" />
+				
+			<separator name="Just for fun also the Button that shows list from lesson 10"/>
+			<button type="action" name="%(project_todo.show_todo_list)d" string="Back to list" />
+
+			</xpath>
+		</field>
+	</record>
+
+	<record id="project_todo_stats_action" model="ir.actions.act_window">
+		<field name="name">Calculate stats action</field>
+		<field name="res_model">sale.order.import</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+	<menuitem id="todo_stats_menu"
+		parent="project_todo.todo_menu"
+		action="project_todo.project_todo_stats_action" sequence="25"/>
+
+	
+	<record id="project_todo_stats_form_results"  model="ir_ui_view">
+		<field name="name">sale.order.import.form</field>
+		<field name="model">sale.order.import</field>
+		<field name="arch"  type="xml">
+			<form string="Stats for selected user and date">
+				<group>
+					<field name="user_id"  readonly="True"/>
+					<field name="date" readonly="True"/>
+				</group>
+				<group>
+					<button special="cancel" string="Cancel" class="oe_link"/>
+				</group>
+			</form>
+		</field>
+	</record>
+
+
+
+</odoo>
