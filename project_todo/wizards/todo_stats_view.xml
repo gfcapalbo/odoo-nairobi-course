@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<record id="project_todo_stats_form"  model="ir_ui_view">
+	<record id="project_todo_stats_form"  model="ir.ui.view">
 		<field name="name">do</field>
 		<field name="model">sale.order.import</field>
 		<field name="arch"  type="xml">
@@ -57,7 +57,7 @@
 		action="project_todo.project_todo_stats_action" sequence="25"/>
 
 	
-	<record id="project_todo_stats_form_results"  model="ir_ui_view">
+	<record id="project_todo_stats_form_results"  model="ir.ui.view">
 		<field name="name">sale.order.import.form</field>
 		<field name="model">sale.order.import</field>
 		<field name="arch"  type="xml">
