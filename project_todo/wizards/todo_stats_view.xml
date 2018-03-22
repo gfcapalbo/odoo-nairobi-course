@@ -42,7 +42,7 @@
 			<xpath expr="//group" position="after">
 
 				<separator string="Calculate Stats" />
-				<button type="object" name="launch_stats" string="Launch stats using calling a function that returns an action" />
+				<button type="object" name="launch_stats2" string="Launch stats using calling a function that returns an action" />
 				<button type="action" name="%(project_todo.project_todo_stats_action)d" string="Launch stats by using a button that just calls an action directly" />
 				
 				<separator string="Just for fun also the Button that shows list from lesson 10"/>

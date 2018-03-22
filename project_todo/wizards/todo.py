@@ -38,7 +38,7 @@ class ProjectTodo(models.Model):
 
 
     @api.multi
-    def launch_stats(self):
+    def launch_stats2(self):
         self.ensure_one()
         """
         functions can return actions, it's a valid alternative 
