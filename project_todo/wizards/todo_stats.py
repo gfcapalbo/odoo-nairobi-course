@@ -52,7 +52,9 @@ class ProjectTodoStats(models.TransientModel):
         result = super(ProjectTodoStats, self).default_get(fields_list=fields_list)
         project_todo_stat_model = self.env['project.todo.stats']
         current_stat_obj = project_todo_stat_model.browse(self.env.context['params']['id'])
-        result['user_id'] = current_stat_obj.user_id
+        # EXERCISE remove the .id from user and interpret error message
+
+        result['user_id'] = current_stat_obj.user_id.id
         result['from_date'] = current_stat_obj.from_date
         return result
 
