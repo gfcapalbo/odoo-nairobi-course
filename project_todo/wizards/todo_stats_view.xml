@@ -7,7 +7,7 @@
 			<form string="Stats selection">
 				<group>
 					<field name="user_id" />
-					<field name="date"/>
+					<field name="from_date"/>
 				</group>
 				<button type="object" name="do_stats" string="Calculate Statistics"
 					class="oe_highlight" />
@@ -43,7 +43,7 @@
 
 				<separator name="Calculate Stats" />
 				<button type="object" name="launch_stats" string="Launch stats using calling a function that returns an action" />
-				<button type="action" name="%(project_todo.project_todostats_action)d" string="Launch stats by using a button that just calls an action directly" />
+				<button type="action" name="%(project_todo.project_todo_stats_action)d" string="Launch stats by using a button that just calls an action directly" />
 				
 				<separator name="Just for fun also the Button that shows list from lesson 10"/>
 				<button type="action" name="%(project_todo.show_todo_list)d" string="Back to list" />
@@ -64,10 +64,10 @@
 			<form string="Stats for selected user and date">
 				<group>
 					<field name="user_id"  readonly="True"/>
-					<field name="date" readonly="True"/>
+					<field name="from_date" readonly="True"/>
 				</group>
 				<group>
-					<button special="cancel" string="Cancel" class="oe_link"/>
+					<button special="cancel" string="Close Calculations" class="oe_link"/>
 				</group>
 			</form>
 		</field>

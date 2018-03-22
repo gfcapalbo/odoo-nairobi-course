@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-from odoo import models, fields
+from odoo import api, models, fields
 
 
 
@@ -20,7 +20,7 @@ class ProjectTodoStats(models.TransientModel):
     _description = " statistics for project todo"
 
     user_id = fields.Many2one('res.users', string='Stats Of')
-    date = fields.Date(string='After Date')
+    from_date = fields.Date(string='After Date')
 
 
     def launch_stats(self):
@@ -29,6 +29,8 @@ class ProjectTodoStats(models.TransientModel):
         to using menues to launch actions. and can be used to implement 
         multi popup types of situations (your context will follow you around)
         """
+        import pudb
+        pudb.set_trace()
         return {
                 'type': 'ir.actions.act_window',
                 'res_model':  'project.todo',
@@ -40,6 +42,23 @@ class ProjectTodoStats(models.TransientModel):
         }
 
 
+    """ Another inheritance example
+    we extend the default_get from odoo core models 
+    """
+    @api.model
+    def default_get(self, fields_list):
+        import pudb
+        pudb.set_trace()
+        result = super(ProjectTodoStats, self).default_get(fields_list=fields_list)
+        project_todo_stat_model = self.env['project.todo.stats']
+        current_stat_obj = project_todo_stat_model.browse(self.env.context['params']['id'])
+        result['user_id'] = current_stat_obj.user_id
+        result['from_date'] = current_stat_obj.from_date
+        return result
+
+
     def do_stats(self):
+        import pudb
+        pudb.set_trace()
         return True
 
