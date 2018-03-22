@@ -51,6 +51,7 @@ class ProjectTodoStats(models.TransientModel):
     """
     @api.model
     def default_get(self, fields_list):
+        current_stat_obj = None
         result = super(ProjectTodoStats, self).default_get(fields_list=fields_list)
         project_todo_stat_model = self.env['project.todo.stats']
         # exercise breakpoint here :  Trace and view context
@@ -61,8 +62,9 @@ class ProjectTodoStats(models.TransientModel):
         elif 'id' in self.env.context.get('params').keys():
             current_stat_obj = project_todo_stat_model.browse(self.env.context['params']['id'])
         # EXERCISE remove the .id from user and interpret error message
-        result['user_id'] = current_stat_obj.user_id.id
-        result['from_date'] = current_stat_obj.from_date
+        if current_stat_obj:
+            result['user_id'] = current_stat_obj.user_id.id
+            result['from_date'] = current_stat_obj.from_date
         return result
 
 
@@ -75,16 +77,22 @@ class ProjectTodoStats(models.TransientModel):
             # EXERCISE : explain
             user_domain = ('user' , '=', self.user_id.id)
         todo_model = self.env['project.todo']
-        domain_urgent =  [('is_urgent', '=', True)]
+        domain_urgent =  [('is_urgent', '=', True)] 
+        domain_how_many_i_made = [('create_uid' , '=', self.user_id.id)]
+        domain_how_many_are_mine = [('user', '=', self.user_id.id)]
         if from_domain:
             domain_urgent.append(from_domain)
+            domain_how_many_i_made.append(from_domain)
+            domain_how_many_are_mine.append(from_domain)
         if user_domain:
             domain_urgent.append(user_domain)
         how_many_urgent = len(todo_model.search(domain_urgent))
+        how_many_i_made = len(todo_model.search(domain_how_many_i_made))
+        how_many_are_mine = len(todo_model.search(domain_how_many_are_mine))
         self.write({
             'how_many_urgent' : how_many_urgent,
-            'how_many_i_made' : how_many_urgent,  # EXERCISE: MAKE CODE
-            'how_many_are_mine' : how_many_urgent,  # EXERCISE MAKE CODE
+            'how_many_i_made' : how_many_i_made,  
+            'how_many_are_mine' : how_many_are_mine,
         })
         return {
                 'type': 'ir.actions.act_window',
